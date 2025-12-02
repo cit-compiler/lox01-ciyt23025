@@ -76,6 +76,8 @@ class Scanner {
       case '\n': //改行
         line++;
         break;
+
+      case '"': string(); break;
         
       default:
         Lox.error(line, "Unexpected character.");
@@ -83,6 +85,24 @@ class Scanner {
     }
   }
 
+  private void string() {
+    while (peek() != '"' && !isAtEnd()) {
+      if (peek() == '\n') line++;
+      advance();
+    }
+
+    if (isAtEnd()) {
+      Lox.error(line, "Unterminated string.");
+      return;
+    }
+
+    // The closing ".
+    advance();
+
+    // Trim the surrounding quotes.
+    String value = source.substring(start + 1, current - 1);
+    addToken(STRING, value);
+  }
 
   private boolean match(char expected) {
     if (isAtEnd()) return false;
