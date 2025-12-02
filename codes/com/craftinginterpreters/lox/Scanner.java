@@ -140,7 +140,6 @@ class Scanner {
 
     addToken(NUMBER,
         Double.parseDouble(source.substring(start, current)));
-  }
 
   private void string() {
     while (peek() != '"' && !isAtEnd()) {
