@@ -1,6 +1,5 @@
 package com.craftinginterpreters.lox;
 
-import static com.craftinginterpreters.lox.TokenType.NUMBER;
 import static com.craftinginterpreters.lox.TokenType.*;
 
 import java.util.ArrayList;
@@ -140,7 +139,7 @@ class Scanner {
 
     addToken(NUMBER,
         Double.parseDouble(source.substring(start, current)));
-
+    }
   private void string() {
     while (peek() != '"' && !isAtEnd()) {
       if (peek() == '\n') line++;
